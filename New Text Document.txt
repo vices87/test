@@ -1,0 +1,41 @@
+ssh-add vicente1.pem
+ssh -A ubuntu@18.230.113.175
+ssh ubuntu@10.0.1.11
+
+ sudo apt-get update
+ sudo apt-get install docker-ce docker-ce-cli containerd.io
+
+sudo apt install mysql-server
+sudo apt install php
+
+
+
+
+sudo yum update -y
+sudo yum install -y docker
+sudo usermod -aG docker ec2-user
+
+docker network create mynet
+docker network ls
+
+docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag
+
+docker run --name blabla \
+-p 3306:3306 \
+-e MYSQL_ROOT_PASSWORD=passowrd \
+-d mysql/mysql-server
+
+
+docker run -name aaamysql \
+-e MYSQL_ROOT_PASSWORD=password \
+-p 3306:3306 \
+--network mynet \
+mysql \
+
+
+This image can also be used as a client for non-Docker or remote instances:
+$ docker run -it --rm mysql mysql -hsome.mysql.host -usome-mysql-user -p
+
+
+-v host(maquina local) : container
+-v /home/mount/data : /var/lib/mysql/data
