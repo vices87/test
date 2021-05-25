@@ -26,11 +26,9 @@ docker run --name blabla \
 -d mysql/mysql-server
 
 
-docker run -name aaamysql \
+docker run --name mysql_test \
 -e MYSQL_ROOT_PASSWORD=password \
--p 3306:3306 \
---network mynet \
-mysql \
+mysql:latest \
 
 
 This image can also be used as a client for non-Docker or remote instances:

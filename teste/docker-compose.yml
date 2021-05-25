@@ -1,9 +1,20 @@
-version: "3"
-
+version: '3.8'
 services:
-  php:
-    volumes:
-    - ./examples:/var/www/html
-    image: php:8.0-apache
+  db:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: test
+      MYSQL_DATABASE: test
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
     ports:
-    - 80:80
+      - "3306:3306"
+  web:
+    image: php:7.3-apache
+    container_name: php_web
+    depends_on:
+      - db
+    volumes:
+      - ./examples:/var/www/html/
+    ports:
+      - "80:80"

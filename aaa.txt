@@ -1,0 +1,37 @@
+//GIT
+yum update
+yum install git
+git clone https://github.com/vices87/test.git
+
+//DOCKER
+sudo amazon-linux-extras install docker
+sudo yum install docker
+sudo service docker start
+sudo usermod -a -G docker ec2-user
+
+//DOCKER-COMPOSE
+sudo curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+docker-compose version
+
+sudo curl -L "https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)"  -o /usr/local/bin/docker-compose
+sudo mv /usr/local/bin/docker-compose /usr/bin/docker-compose
+sudo chmod +x /usr/bin/docker-compose
+
+sudo yum install mysql
+docker exec -it 5a977121c002 bash
+mysql -u root -p
+create table MyGuests( id varchar(20), firstname varchar(20), lastname varchar(20));
+insert into MyGuests (id, firstname, lastname) values ('1', 'vicente', 'martorano');
+select * from MyGuests;
+
+//instalar a extensão no php do mysqli
+RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
+RUN apt-get update && docker-php-ext-install pdo_mysql
+RUN docker-php-ext-install mysqli pdo pdo_mysql
+apachectl restart
+
+//alterar dentro do mysql
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';
+ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'root';
+ALTER USER 'default'@'%' IDENTIFIED WITH mysql_native_password BY 'secret';
